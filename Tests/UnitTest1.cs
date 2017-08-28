@@ -6,9 +6,24 @@ namespace Tests
     [TestClass]
     public class UnitTest1
     {
+        [TestMethod]
+        public void OrUpon()
+        {
+            var calledBack = false;
+            var test = new IsText("AA")
+                        .OrUpon(new IsText("BB"), (r) =>
+                        {
+                            calledBack = true;
+                        })
+                        .And(new IsText("CC"));
+
+            var result = test.TryParse("BBCC");
+            Assert.IsTrue(result.Succeeded);
+            Assert.IsTrue(calledBack);
+        }
 
         [TestMethod]
-        public void Upon()
+        public void AndUpon()
         {
             var calledBack = false;
             var test = new IsText("AA")
