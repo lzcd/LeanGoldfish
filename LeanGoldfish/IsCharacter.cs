@@ -13,7 +13,8 @@ namespace LeanGoldfish
 
         internal override ParsingResult TryParse(string text, int position)
         {
-            if (text[position] != character)
+            if (position >= text.Length ||
+                text[position] != character)
             {
                 return new ParsingResult()
                 {
