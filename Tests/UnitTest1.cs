@@ -7,6 +7,17 @@ namespace Tests
     [TestClass]
     public class UnitTest1
     {
+
+        [TestMethod]
+        public void IsText()
+        {
+            var test = new IsText("ABC");
+
+            var result = test.TryParse("ABC");
+
+            Assert.IsTrue(result.Succeeded);
+        }
+
         [TestMethod]
         public void SimpleAndAlsos()
         {
@@ -36,10 +47,14 @@ namespace Tests
         {
             var abc = new IsCharacter('A')
                             .AndAlso(new IsCharacter('B'))
-                            .AndAlso(new IsCharacter('C'));
+                            .AndAlso(new IsCharacter('C'))
+                            ;
+
             var def = new IsCharacter('D')
                             .AndAlso(new IsCharacter('E'))
-                            .AndAlso(new IsCharacter('F'));
+                            .AndAlso(new IsCharacter('F'))
+                            ;
+
             var abcOrDef = abc.OrElse(def);
 
             var result = abcOrDef.TryParse("DEF");
