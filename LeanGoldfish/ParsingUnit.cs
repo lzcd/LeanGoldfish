@@ -6,14 +6,14 @@ namespace LeanGoldfish
 {
     public abstract class ParsingUnit
     {
-        public ParsingUnit AndAlso(ParsingUnit nextUnit)
+        public ParsingUnit And(ParsingUnit nextUnit)
         {
-            return new AndAlso(this, nextUnit);
+            return new And(this, nextUnit);
         }
 
-        public ParsingUnit OrElse(ParsingUnit nextUnit)
+        public ParsingUnit Or(ParsingUnit nextUnit)
         {
-            return new OrElse(this, nextUnit);
+            return new Or(this, nextUnit);
         }
 
         public ParsingResult TryParse(string text)

@@ -4,12 +4,12 @@ using System.Text;
 
 namespace LeanGoldfish
 {
-    public class AndAlso : ParsingUnit
+    public class Or : ParsingUnit
     {
         private ParsingUnit first;
         private ParsingUnit second;
 
-        public AndAlso(ParsingUnit first, ParsingUnit second)
+        public Or(ParsingUnit first, ParsingUnit second)
         {
             this.first = first;
             this.second = second;
@@ -19,12 +19,12 @@ namespace LeanGoldfish
         {
             var firstResult = first.TryParse(text, position);
 
-            if (!firstResult.Succeeded)
+            if (firstResult.Succeeded)
             {
                 return firstResult;
             }
 
-            var secondResult = second.TryParse(text, firstResult.EndPosition + 1);
+            var secondResult = second.TryParse(text, position);
 
             return secondResult;
         }

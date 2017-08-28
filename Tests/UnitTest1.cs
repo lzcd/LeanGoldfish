@@ -9,6 +9,29 @@ namespace Tests
     {
 
         [TestMethod]
+        public void ZeroOrMore()
+        {
+            var test = new ZeroOrMore(new IsCharacter('A'))
+                .And(new IsCharacter('B'));
+
+            var result = test.TryParse("AB");
+
+            Assert.IsTrue(result.Succeeded);
+        }
+
+        [TestMethod]
+        public void OneOrMore()
+        {
+            var test = new OneOrMore(new IsCharacter('A'))
+                .And(new IsCharacter('B'));
+
+            var result = test.TryParse("AAAB");
+
+            Assert.IsTrue(result.Succeeded);
+        }
+
+
+        [TestMethod]
         public void IsText()
         {
             var test = new IsText("ABC");
@@ -19,11 +42,11 @@ namespace Tests
         }
 
         [TestMethod]
-        public void SimpleAndAlsos()
+        public void SimpleAnds()
         {
             var test = new IsCharacter('A')
-                            .AndAlso(new IsCharacter('B'))
-                            .AndAlso(new IsCharacter('C'));
+                            .And(new IsCharacter('B'))
+                            .And(new IsCharacter('C'));
 
             var result = test.TryParse("ABC");
 
@@ -31,11 +54,11 @@ namespace Tests
         }
 
         [TestMethod]
-        public void SimpleOrElses()
+        public void SimpleOrs()
         {
             var test = new IsCharacter('A')
-                            .OrElse(new IsCharacter('B'))
-                            .OrElse(new IsCharacter('C'));
+                            .Or(new IsCharacter('B'))
+                            .Or(new IsCharacter('C'));
 
             var result = test.TryParse("B");
 
@@ -43,19 +66,19 @@ namespace Tests
         }
 
         [TestMethod]
-        public void AndAlsoPlusOrElses()
+        public void AndPlusOr()
         {
             var abc = new IsCharacter('A')
-                            .AndAlso(new IsCharacter('B'))
-                            .AndAlso(new IsCharacter('C'))
+                            .And(new IsCharacter('B'))
+                            .And(new IsCharacter('C'))
                             ;
 
             var def = new IsCharacter('D')
-                            .AndAlso(new IsCharacter('E'))
-                            .AndAlso(new IsCharacter('F'))
+                            .And(new IsCharacter('E'))
+                            .And(new IsCharacter('F'))
                             ;
 
-            var abcOrDef = abc.OrElse(def);
+            var abcOrDef = abc.Or(def);
 
             var result = abcOrDef.TryParse("DEF");
 

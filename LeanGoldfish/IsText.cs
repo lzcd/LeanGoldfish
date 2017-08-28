@@ -17,7 +17,7 @@ namespace LeanGoldfish
             var secondLastOrdinal = text.Length - 2;
             for (var ordinal = secondLastOrdinal; ordinal >= firstOrdinal; ordinal--)
             {
-                characterTest = new IsCharacter(text[ordinal]).AndAlso(characterTest);
+                characterTest = new IsCharacter(text[ordinal]).And(characterTest);
             }
 
             test = characterTest;
