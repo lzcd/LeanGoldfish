@@ -9,6 +9,22 @@ namespace Tests
     {
 
         [TestMethod]
+        public void Upon()
+        {
+            var calledBack = false;
+            var test = new IsCharacter('A')
+                        .AndUpon(new IsCharacter('B'), (r) =>
+                        {
+                            calledBack = true;
+                        })
+                        .And(new IsCharacter('C'));
+
+            var result = test.TryParse("ABC");
+            Assert.IsTrue(result.Succeeded);
+            Assert.IsTrue(calledBack);
+        }
+
+        [TestMethod]
         public void Maybe()
         {
             var test = new Maybe(new IsCharacter('A'))

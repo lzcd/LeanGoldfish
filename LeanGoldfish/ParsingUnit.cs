@@ -16,6 +16,11 @@ namespace LeanGoldfish
             return new Or(this, nextUnit);
         }
 
+        public ParsingUnit AndUpon(ParsingUnit nextUnit, Action<ParsingResult> action)
+        {
+            return new And(this, new Upon(nextUnit, action));
+        }
+
         public ParsingResult TryParse(string text)
         {
             return TryParse(text, 0);
