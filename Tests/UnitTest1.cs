@@ -9,6 +9,17 @@ namespace Tests
     {
 
         [TestMethod]
+        public void Maybe()
+        {
+            var test = new Maybe(new IsCharacter('A'))
+                .And(new IsCharacter('B'));
+
+            var result = test.TryParse("AB");
+
+            Assert.IsTrue(result.Succeeded);
+        }
+
+        [TestMethod]
         public void ZeroOrMore()
         {
             var test = new ZeroOrMore(new IsCharacter('A'))
