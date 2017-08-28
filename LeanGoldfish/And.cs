@@ -22,7 +22,12 @@
 
             var secondResult = second.TryParse(text, firstResult.EndPosition + 1);
 
-            return secondResult;
+            return new ParsingResult()
+            {
+                Succeeded = true,
+                StartPosition = firstResult.StartPosition,
+                EndPosition = secondResult.EndPosition
+            };
         }
     }
 }
