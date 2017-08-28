@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LeanGoldfish
+﻿namespace LeanGoldfish
 {
     public class IsCharacter : ParsingUnit
     {

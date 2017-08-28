@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LeanGoldfish;
 
 namespace Tests
@@ -12,14 +11,14 @@ namespace Tests
         public void Upon()
         {
             var calledBack = false;
-            var test = new IsCharacter('A')
-                        .AndUpon(new IsCharacter('B'), (r) =>
+            var test = new IsText("AA")
+                        .AndUpon(new IsText("BB"), (r) =>
                         {
                             calledBack = true;
                         })
-                        .And(new IsCharacter('C'));
+                        .And(new IsText("CC"));
 
-            var result = test.TryParse("ABC");
+            var result = test.TryParse("AABBCC");
             Assert.IsTrue(result.Succeeded);
             Assert.IsTrue(calledBack);
         }

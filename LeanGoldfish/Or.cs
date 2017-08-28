@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LeanGoldfish
+﻿namespace LeanGoldfish
 {
     public class Or : ParsingUnit
     {
