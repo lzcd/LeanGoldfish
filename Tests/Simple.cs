@@ -41,7 +41,7 @@ namespace Tests
         [TestMethod]
         public void Maybe()
         {
-            var test = new Maybe(new IsCharacter('A'))
+            var test = new MaybeOne(new IsCharacter('A'))
                 .And(new IsCharacter('B'));
 
             var result = test.TryParse("AB", () => { return new ParsingResult(); });
@@ -52,7 +52,7 @@ namespace Tests
         [TestMethod]
         public void ZeroOrMore()
         {
-            var test = new ZeroOrMore(new IsCharacter('A'))
+            var test = new MaybeSome(new IsCharacter('A'))
                 .And(new IsCharacter('B'));
 
             var result = test.TryParse("AB", () => { return new ParsingResult(); });
@@ -63,7 +63,7 @@ namespace Tests
         [TestMethod]
         public void OneOrMore()
         {
-            var test = new OneOrMore(new IsCharacter('A'))
+            var test = new Some(new IsCharacter('A'))
                 .And(new IsCharacter('B'));
 
             var result = test.TryParse("AAAB", () => { return new ParsingResult(); });
