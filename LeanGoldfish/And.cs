@@ -1,4 +1,6 @@
-﻿namespace LeanGoldfish
+﻿using System;
+
+namespace LeanGoldfish
 {
     public class And : ParsingUnit
     {
@@ -11,23 +13,27 @@
             this.second = second;
         }
 
-        internal override ParsingResult TryParse(string text, int position)
+        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult)
         {
-            var firstResult = first.TryParse(text, position);
+            var firstResult = first.TryParse(text, position, createResult);
 
             if (!firstResult.Succeeded)
             {
                 return firstResult;
             }
 
-            var secondResult = second.TryParse(text, firstResult.EndPosition + 1);
-
-            return new ParsingResult()
+            var secondResult = second.TryParse(text, firstResult.EndPosition + 1, createResult);
+            if (!secondResult.Succeeded)
             {
-                Succeeded = true,
-                StartPosition = firstResult.StartPosition,
-                EndPosition = secondResult.EndPosition
-            };
+                return secondResult;
+            }
+
+            var success = createResult();
+
+            success.Succeeded = true;
+            success.StartPosition = firstResult.StartPosition;
+            success.EndPosition = secondResult.EndPosition;
+            return success;
         }
     }
 }

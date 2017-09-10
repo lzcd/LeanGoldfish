@@ -1,4 +1,6 @@
-﻿namespace LeanGoldfish
+﻿using System;
+
+namespace LeanGoldfish
 {
     public class IsText : ParsingUnit
     {
@@ -19,9 +21,9 @@
             test = characterTest;
         }
 
-        internal override ParsingResult TryParse(string text, int position)
+        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult)
         {
-            return test.TryParse(text, position);
+            return test.TryParse(text, position, createResult);
         }
     }
 }

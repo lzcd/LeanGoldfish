@@ -1,4 +1,6 @@
-﻿namespace LeanGoldfish
+﻿using System;
+
+namespace LeanGoldfish
 {
     public class Maybe : ParsingUnit
     {
@@ -9,18 +11,18 @@
             this.unit = unit;
         }
 
-        internal override ParsingResult TryParse(string text, int position)
+        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult)
         {
-            var result = unit.TryParse(text, position);
+            var result = unit.TryParse(text, position, createResult);
 
             if (!result.Succeeded)
             {
-                return new ParsingResult()
-                {
-                    Succeeded = true,
-                    StartPosition = position,
-                    EndPosition = position - 1
-                };
+                result = createResult();
+                result.Succeeded = true;
+                result.StartPosition = position;
+                result.EndPosition = position - 1;
+
+                return result;
             }
 
             return result;
