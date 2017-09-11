@@ -1,5 +1,5 @@
 # LeanGoldfish
-A Simple Garbage Collector Friendly Combinator Parser Library
+A Simple Garbage-Collector-Friendly Combinator-Parser Library
 
 Need to do some text parsing in an environment where every object creation is something you've got to be worried about?
 (Lest it accidentally cause an ugly garbage collection right in the middle of something important?)
