@@ -24,11 +24,11 @@ namespace LeanGoldfish
             return new Or(this, new Upon(nextUnit, action));
         }
 
-        public ParsingResult TryParse(string text, Func<ParsingResult> createResult)
+        public ParsingResult TryParse(string text, Func<ParsingResult> createResult, Action<ParsingResult> destroyResult)
         {
-            return TryParse(text, 0, createResult);
+            return TryParse(text, 0, createResult, destroyResult);
         }
 
-        internal abstract ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult);
+        internal abstract ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult, Action<ParsingResult> destroyResult);
     }
 }

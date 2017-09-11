@@ -17,7 +17,7 @@ namespace Tests
                         })
                         .And(new IsText("CC"));
 
-            var result = test.TryParse("BBCC", () => { return new ParsingResult(); });
+            var result = test.TryParse("BBCC", () => { return new ParsingResult(); }, (r) => { });
             Assert.IsTrue(result.Succeeded);
             Assert.IsTrue(calledBack);
         }
@@ -33,7 +33,7 @@ namespace Tests
                         })
                         .And(new IsText("CC"));
 
-            var result = test.TryParse("AABBCC", () => { return new ParsingResult(); });
+            var result = test.TryParse("AABBCC", () => { return new ParsingResult(); }, (r) => { });
             Assert.IsTrue(result.Succeeded);
             Assert.IsTrue(calledBack);
         }
@@ -44,7 +44,7 @@ namespace Tests
             var test = new MaybeOne(new IsCharacter('A'))
                 .And(new IsCharacter('B'));
 
-            var result = test.TryParse("AB", () => { return new ParsingResult(); });
+            var result = test.TryParse("AB", () => { return new ParsingResult(); }, (r) => { });
 
             Assert.IsTrue(result.Succeeded);
         }
@@ -55,7 +55,7 @@ namespace Tests
             var test = new MaybeSome(new IsCharacter('A'))
                 .And(new IsCharacter('B'));
 
-            var result = test.TryParse("AB", () => { return new ParsingResult(); });
+            var result = test.TryParse("AB", () => { return new ParsingResult(); }, (r) => { });
 
             Assert.IsTrue(result.Succeeded);
         }
@@ -66,7 +66,7 @@ namespace Tests
             var test = new Some(new IsCharacter('A'))
                 .And(new IsCharacter('B'));
 
-            var result = test.TryParse("AAAB", () => { return new ParsingResult(); });
+            var result = test.TryParse("AAAB", () => { return new ParsingResult(); }, (r) => { });
 
             Assert.IsTrue(result.Succeeded);
         }
@@ -77,7 +77,7 @@ namespace Tests
         {
             var test = new IsText("ABC");
 
-            var result = test.TryParse("ABC", () => { return new ParsingResult(); });
+            var result = test.TryParse("ABC", () => { return new ParsingResult(); }, (r) => { });
 
             Assert.IsTrue(result.Succeeded);
         }
@@ -89,7 +89,7 @@ namespace Tests
                             .And(new IsCharacter('B'))
                             .And(new IsCharacter('C'));
 
-            var result = test.TryParse("ABC", () => { return new ParsingResult(); });
+            var result = test.TryParse("ABC", () => { return new ParsingResult(); }, (r) => { });
 
             Assert.IsTrue(result.Succeeded);
         }
@@ -101,7 +101,7 @@ namespace Tests
                             .Or(new IsCharacter('B'))
                             .Or(new IsCharacter('C'));
 
-            var result = test.TryParse("B", () => { return new ParsingResult(); });
+            var result = test.TryParse("B", () => { return new ParsingResult(); }, (r) => { });
 
             Assert.IsTrue(result.Succeeded);
         }
@@ -121,7 +121,7 @@ namespace Tests
 
             var abcOrDef = abc.Or(def);
 
-            var result = abcOrDef.TryParse("DEF", () => { return new ParsingResult(); });
+            var result = abcOrDef.TryParse("DEF", () => { return new ParsingResult(); }, (r) => { });
 
             Assert.IsTrue(result.Succeeded);
         }

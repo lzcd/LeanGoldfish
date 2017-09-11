@@ -13,9 +13,9 @@ namespace LeanGoldfish
             this.action = action;
         }
 
-        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult)
+        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult, Action<ParsingResult> destroyResult)
         {
-            var result = unit.TryParse(text, position, createResult);
+            var result = unit.TryParse(text, position, createResult, destroyResult);
 
             if (!result.Succeeded)
             {

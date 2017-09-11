@@ -11,7 +11,7 @@ namespace LeanGoldfish
             this.character = character;
         }
 
-        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult)
+        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult, Action<ParsingResult> destroyResult)
         {
             if (position >= text.Length ||
                 text[position] != character)

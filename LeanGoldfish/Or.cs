@@ -13,16 +13,17 @@ namespace LeanGoldfish
             this.second = second;
         }
 
-        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult)
+        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult, Action<ParsingResult> destroyResult)
         {
-            var firstResult = first.TryParse(text, position, createResult);
+            var firstResult = first.TryParse(text, position, createResult, destroyResult);
 
             if (firstResult.Succeeded)
             {
                 return firstResult;
             }
+            destroyResult(firstResult);
 
-            var secondResult = second.TryParse(text, position, createResult);
+            var secondResult = second.TryParse(text, position, createResult, destroyResult);
 
             return secondResult;
         }

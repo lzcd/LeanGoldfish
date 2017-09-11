@@ -11,20 +11,21 @@ namespace LeanGoldfish
             this.unit = unit;
         }
 
-        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult)
+        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult, Action<ParsingResult> destroyResult)
         {
             var matchCount = 0;
             var lastPosition = position - 1;
             var match = default(ParsingResult);
             do
             {
-                match = unit.TryParse(text, lastPosition + 1, createResult);
+                match = unit.TryParse(text, lastPosition + 1, createResult, destroyResult);
                 if (match.Succeeded)
                 {
                     lastPosition = match.EndPosition;
                     matchCount++;
                 }
             } while (match.Succeeded);
+            destroyResult(match);
 
             if (matchCount < 1)
             {

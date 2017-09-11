@@ -21,9 +21,9 @@ namespace LeanGoldfish
             test = characterTest;
         }
 
-        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult)
+        internal override ParsingResult TryParse(string text, int position, Func<ParsingResult> createResult, Action<ParsingResult> destroyResult)
         {
-            return test.TryParse(text, position, createResult);
+            return test.TryParse(text, position, createResult, destroyResult);
         }
     }
 }
