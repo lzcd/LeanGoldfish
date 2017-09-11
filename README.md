@@ -29,7 +29,7 @@ var myParser = new IsCharacter('A')
                    .And(new IsCharacter('C'));
 ```
 
-Here's another. This time the parser will be configured to check if a single character is one of the three valid ones:
+This time the parser will be configured to check if a single character is one of the three valid ones:
 
 ```c#
 var myParser = new IsCharacter('A')
